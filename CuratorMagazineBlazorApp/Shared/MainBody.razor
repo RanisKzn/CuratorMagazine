@@ -1,13 +1,20 @@
-﻿@using CuratorMagazineWebAPI.Models.Entities.Domains
+﻿@using CuratorMagazineBlazorApp.Shared.DEW
+@using CuratorMagazineBlazorApp.Shared.StatsCollect
+@using CuratorMagazineBlazorApp.Shared.VDEW
+@using CuratorMagazineWebAPI.Models.Entities.Domains
 @switch (@StateRoleNavBar?.RoleName)
 {
-    case "Head":
+    case "WorkWithVDEW":
         <WorkWithVDEW CurrentUser="CurrentUser"></WorkWithVDEW>
         break;
-    case "Vice":
+    case "StatsCollect":
         <StatsCollect></StatsCollect>
         break;
-    case "Tutor":
+    case "WorkWithGroupVDEW":
+        <WorkWithGroupVDEW CurrentUser="CurrentUser"></WorkWithGroupVDEW>
+        break;
+    case "WorkWithCuratorVDEW":
+        <WorkWithCuratorVDEW CurrentUser="CurrentUser"></WorkWithCuratorVDEW>
         break;
     default:
         <CarouselComponent></CarouselComponent>

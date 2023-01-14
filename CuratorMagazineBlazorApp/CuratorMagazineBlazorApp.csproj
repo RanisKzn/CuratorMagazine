@@ -23,4 +23,8 @@
     <ProjectReference Include="..\CuratorMagazineWebAPI\CuratorMagazineWebAPI.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Shared\Curator\" />
+  </ItemGroup>
+
 </Project>
