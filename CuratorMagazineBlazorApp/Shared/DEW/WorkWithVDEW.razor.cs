@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Newtonsoft.Json;
 
-namespace CuratorMagazineBlazorApp.Shared
+namespace CuratorMagazineBlazorApp.Shared.DEW
 {
     public partial class WorkWithVDEW
     {
@@ -34,10 +34,10 @@ namespace CuratorMagazineBlazorApp.Shared
             _users = JsonConvert.DeserializeObject<List<User>>(users.Result.Items?.ToString() ?? string.Empty);
         }
 
-        protected override async Task OnInitializedAsync()
-        {
-            await Task.Delay(1);
-            await GetVDEW();
-        }
+        //protected override async Task OnInitializedAsync()
+        //{
+        //    await Task.Delay(1);
+        //    await GetVDEW();
+        //}
     }
 }
