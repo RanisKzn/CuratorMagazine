@@ -63,7 +63,7 @@ public class DivisionController : BaseController
         if (division == null)
             return NotFound();
 
-        _mqService.SendMessage(division.Name);
+        _mqService.SendMessage(division);
 
         return division;
     }

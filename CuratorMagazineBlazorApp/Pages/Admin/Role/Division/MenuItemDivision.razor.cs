@@ -46,23 +46,16 @@ public partial class MenuItemDivision
     /// The page index
     /// </summary>
     int _pageIndex = 1;
+
     /// <summary>
     /// The page size
     /// </summary>
     int _pageSize = 10;
+
     /// <summary>
     /// The total
     /// </summary>
     int _total = 0;
-
-    /// <summary>
-    /// The i
-    /// </summary>
-    int i = 0;
-    /// <summary>
-    /// The edit identifier
-    /// </summary>
-    private string? _editId;
 
     /// <summary>
     /// On initialized as an asynchronous operation.
@@ -84,32 +77,38 @@ public partial class MenuItemDivision
         if (_divisions != null) _total = _divisions.Count;
     }
 
+    /// <summary>Gets the divisions.</summary>
     protected async Task GetDivisions()
     {
         var factory = new ConnectionFactory() { HostName = "localhost" };
+        var message = String.Empty;
 
         using (var connection = factory.CreateConnection())
-        using (var channel = connection.CreateModel())
         {
-            channel.QueueDeclare(queue: "MyQueue",
-                durable: false,
-                exclusive: false,
-                autoDelete: false,
-                arguments: null);
-
-            var consumer = new EventingBasicConsumer(channel);
-            consumer.Received += (model, ea) =>
+            using (var channel = connection.CreateModel())
             {
-                var body = ea.Body.ToArray();
-                var message = Encoding.UTF8.GetString(body);
-                Console.WriteLine(" [x] Received {0}", message);
-            };
-            channel.BasicConsume(queue: "MyQueue",
-                autoAck: true,
-                consumer: consumer);
+                channel.QueueDeclare(queue: "MyQueue",
+                    durable: false,
+                    exclusive: false,
+                    autoDelete: false,
+                    arguments: null);
 
-            Console.WriteLine(" Press [enter] to exit.");
-            Console.ReadLine();
+                var consumer = new EventingBasicConsumer(channel);
+
+                consumer.Received += (model, ea) =>
+                {
+                    var body = ea.Body.ToArray();
+                    message = Encoding.UTF8.GetString(body);
+                    Console.WriteLine(" [x] Received {0}", message);
+                };
+                
+                channel.BasicConsume(queue: "MyQueue",
+                    autoAck: true,
+                    consumer: consumer);
+
+                Console.WriteLine(" Press [enter] to exit.");
+                Console.ReadLine();
+            }
         }
     }
 

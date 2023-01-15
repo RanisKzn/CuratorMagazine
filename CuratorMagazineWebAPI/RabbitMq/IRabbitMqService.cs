@@ -10,6 +10,7 @@ public interface IRabbitMqService
     /// </summary>
     /// <param name="obj">The object.</param>
     void SendMessage(object obj);
+
     /// <summary>
     /// Sends the message.
     /// </summary>
