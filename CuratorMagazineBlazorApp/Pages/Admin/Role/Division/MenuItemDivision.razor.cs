@@ -1,7 +1,10 @@
-﻿using AntDesign.TableModels;
+﻿using System.Text;
+using AntDesign.TableModels;
 using CuratorMagazineBlazorApp.Data.Services;
 using Microsoft.AspNetCore.Components;
 using Newtonsoft.Json;
+using RabbitMQ.Client;
+using RabbitMQ.Client.Events;
 using ITable = AntDesign.ITable;
 
 namespace CuratorMagazineBlazorApp.Pages.Admin.Role.Division;
@@ -68,6 +71,9 @@ public partial class MenuItemDivision
     protected override async Task OnInitializedAsync()
     {
         var ret = await DivisionService?.PostAsync()!;
+
+        await GetDivisions();
+
         _divisions = JsonConvert.DeserializeObject<List<CuratorMagazineWebAPI.Models.Entities.Domains.Division>>(ret.Result.Items?.ToString() ?? string.Empty);
 
         _divisions?.ForEach(item =>
@@ -76,6 +82,35 @@ public partial class MenuItemDivision
         });
 
         if (_divisions != null) _total = _divisions.Count;
+    }
+
+    protected async Task GetDivisions()
+    {
+        var factory = new ConnectionFactory() { HostName = "localhost" };
+
+        using (var connection = factory.CreateConnection())
+        using (var channel = connection.CreateModel())
+        {
+            channel.QueueDeclare(queue: "MyQueue",
+                durable: false,
+                exclusive: false,
+                autoDelete: false,
+                arguments: null);
+
+            var consumer = new EventingBasicConsumer(channel);
+            consumer.Received += (model, ea) =>
+            {
+                var body = ea.Body.ToArray();
+                var message = Encoding.UTF8.GetString(body);
+                Console.WriteLine(" [x] Received {0}", message);
+            };
+            channel.BasicConsume(queue: "MyQueue",
+                autoAck: true,
+                consumer: consumer);
+
+            Console.WriteLine(" Press [enter] to exit.");
+            Console.ReadLine();
+        }
     }
 
     /// <summary>
