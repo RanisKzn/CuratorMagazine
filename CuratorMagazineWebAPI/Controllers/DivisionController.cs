@@ -18,6 +18,7 @@ using CuratorMagazineWebAPI.Models.Entities.Domains;
 using CuratorMagazineWebAPI.Models.Bases.Filters;
 using CuratorMagazineWebAPI.Models.Bases.ActionResults;
 using CuratorMagazineWebAPI.Controllers.Bases;
+using CuratorMagazineWebAPI.RabbitMq;
 
 namespace CuratorMagazineWebAPI.Controllers;
 
@@ -34,12 +35,19 @@ public class DivisionController : BaseController
     private readonly IDivisionRepository _repository;
 
     /// <summary>
+    /// The mq service
+    /// </summary>
+    private readonly IRabbitMqService _mqService;
+
+    /// <summary>
     /// Initializes a new instance of the <see cref="DivisionController" /> class.
     /// </summary>
     /// <param name="repository">The repository.</param>
-    public DivisionController(IDivisionRepository repository)
+    /// <param name="mqService">The mq service.</param>
+    public DivisionController(IDivisionRepository repository, IRabbitMqService mqService)
     {
         _repository = repository;
+        _mqService = mqService;
     }
 
     /// <summary>
@@ -54,6 +62,8 @@ public class DivisionController : BaseController
 
         if (division == null)
             return NotFound();
+
+        _mqService.SendMessage(division.Name);
 
         return division;
     }
