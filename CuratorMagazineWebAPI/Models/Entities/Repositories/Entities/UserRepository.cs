@@ -71,6 +71,11 @@ public class UserRepository : BaseRepository<User>, IUserRepository
         var queries = (filter.query ?? "").Split(' ', StringSplitOptions.RemoveEmptyEntries);
         queue = queries.Aggregate(queue, (current, q) => current.Where(w => EF.Functions.ILike(w.Name, $"%{q}%")));
 
+        if (filter.groupId != null)
+        {
+            queue = queue.Where(u => u.GroupId == filter.groupId);
+        }
+
         queue = queue.OrderBy(o => o.Name);
         return queue;
     }

@@ -31,6 +31,12 @@ public class GroupService : BaseService
         return dto;
     }
 
+    public async Task<BaseResponse<User?>> GetGroupCuratorAsync(int id)
+    {
+        BaseResponse<User?> dto = await SendAsync<User>($"GetGroupCurator/{id}", HttpMethod.Post);
+        return dto;
+    }
+
     /// <summary>
     /// Create as an asynchronous operation.
     /// </summary>

@@ -33,13 +33,16 @@ public class GroupController : BaseController
     /// </summary>
     private readonly IGroupRepository _repository;
 
+    private readonly IUserRepository _userRepository;
+
     /// <summary>
     /// Initializes a new instance of the <see cref="GroupController" /> class.
     /// </summary>
     /// <param name="repository">The repository.</param>
-    public GroupController(IGroupRepository repository)
+    public GroupController(IGroupRepository repository, IUserRepository userRepository)
     {
         _repository = repository;
+        _userRepository = userRepository;
     }
 
     /// <summary>
@@ -67,6 +70,15 @@ public class GroupController : BaseController
     public async Task<BaseResponseActionResult<BaseDtoListResult>> GetList([FromBody] BaseFilterGetList data)
     {
         var ret = await _repository.GetList(data);
+        return ret;
+    }
+
+    [HttpPost("GetGroupCurator")]
+    public async Task<BaseResponseActionResult<BaseDtoListResult>> GetGroupCurator(int groupId)
+    {
+        var ret = await _userRepository.GetList(new BaseFilterGetList()
+            { page = 1, query = "", groupId = groupId });
+
         return ret;
     }
 

@@ -5,10 +5,13 @@
 <div class="container my-4 bg-secondary bg-opacity-50">
     <div class="container-fluid">
         <BodySearchBar></BodySearchBar>
-       <div class="overflow-auto container scroll">
-            @foreach (var item in _groups)
+        <div class="overflow-auto container scroll">
+            @if (Groups != null)
             {
-                <IndividualGroupVDEW group="item"></IndividualGroupVDEW>
+                @foreach (var item in Groups!)
+                {
+                    <IndividualGroupVDEW group="item"></IndividualGroupVDEW>
+                }
             }
         </div>
         <div class="row">

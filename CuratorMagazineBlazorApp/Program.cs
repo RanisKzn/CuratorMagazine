@@ -9,7 +9,7 @@ builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddAntDesign();
 builder.Services.AddCors();
-builder.Services.AddHostedService<RabbitMqListener>();
+//builder.Services.AddHostedService<RabbitMqListener>();
 
 #region Services
 builder.Services.AddSingleton<UserService>();

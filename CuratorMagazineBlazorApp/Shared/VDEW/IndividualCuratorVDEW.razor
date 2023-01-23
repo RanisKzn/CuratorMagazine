@@ -1,5 +1,6 @@
 ﻿@using CuratorMagazineBlazorApp.Shared.ModalWindows
 @using CuratorMagazineWebAPI.Models.Entities.Domains
+@using CuratorMagazineBlazorApp.Data.Services
 
 <ModalChangeCuratorWindow></ModalChangeCuratorWindow>
 <div class="row mt-3 group rounded">
@@ -23,5 +24,6 @@
     [Parameter]
     public User user { get; set; }
 
-
+    [Inject]
+    public GroupService UserService { get; set; }
 }
