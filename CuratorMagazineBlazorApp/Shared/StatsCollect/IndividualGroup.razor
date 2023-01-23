@@ -1,4 +1,5 @@
-﻿@using CuratorMagazineWebAPI.Models.Entities.Domains
+﻿@using CuratorMagazineBlazorApp.Shared.Curator
+@using CuratorMagazineWebAPI.Models.Entities.Domains
 
 
 <div class="row mt-3 group rounded">
@@ -11,12 +12,23 @@
         @*Пометка придумать как достать куратора*@
         
     </div>
+    @if (CurrentUser.Role.Name == "admin3")
+    {
+        <div class="col-md-3 text-end mt-3">
+            <a href="../Curator/cur3.html" type="button" class="btn btn-secondary me-2">Изменить</a>
+        </div>
+        <ChangeGroup group="group"></ChangeGroup>
+    }
+   
     <hr class="mb-0 mt-0">
 </div>
 
 @code {
     [Parameter]
     public Group group { get; set; }
+
+    [Parameter]
+    public User? CurrentUser { get; set; }
 
 
 } 
