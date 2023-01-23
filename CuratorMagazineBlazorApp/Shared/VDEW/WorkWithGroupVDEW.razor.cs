@@ -15,6 +15,9 @@ namespace CuratorMagazineBlazorApp.Shared.VDEW
         [Inject]
         public UserService? UserService { get; set; }
 
+        [Inject]
+        public GroupService? GroupService { get; set; }
+
         private List<Group>? _groups;
 
         void DeleteGroup(Group group)
