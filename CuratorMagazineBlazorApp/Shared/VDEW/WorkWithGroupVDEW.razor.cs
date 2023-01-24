@@ -40,9 +40,5 @@ namespace CuratorMagazineBlazorApp.Shared.VDEW
             //var groups = await UserService.PostAsync();
             //Groups = JsonConvert.DeserializeObject<List<Group>>(groups.Result.Items?.ToString() ?? string.Empty);
         }
-        protected override async Task OnInitializedAsync()
-        {
-            await GetGroups();
-        }
     }
 }

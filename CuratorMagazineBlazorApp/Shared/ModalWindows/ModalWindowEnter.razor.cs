@@ -67,10 +67,10 @@ public partial class ModalWindowEnter
 
         await FindUser(list);
 
-        if (_model.Role?.Name == "Администратор")
-        {
-            NavigationManager.NavigateTo($"admin", true);
-        }
+        //if (_model.Role?.Name == "Администратор")
+        //{
+        //    NavigationManager.NavigateTo($"admin", true);
+        //}
 
         await RoleCallback.InvokeAsync(_model);
     }

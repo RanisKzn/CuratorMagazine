@@ -74,7 +74,8 @@ public class UserService : BaseService
         var parameters = new Dictionary<string, string>
         {
             { "query", query }, 
-            { "page", "1" }
+            { "page", "1" },
+            { "groupId", null }
         };
         var ret = await SendAsync<BaseDtoListResult>("GetList", HttpMethod.Post, parameters);
         return ret;
