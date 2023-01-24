@@ -34,11 +34,15 @@ namespace CuratorMagazineBlazorApp.Shared.VDEW
         {
 
         }
-        public async void GetGroups()
+        public async Task GetGroups()
         {
             //Groups = new List<Group>();
             //var groups = await UserService.PostAsync();
             //Groups = JsonConvert.DeserializeObject<List<Group>>(groups.Result.Items?.ToString() ?? string.Empty);
+        }
+        protected override async Task OnInitializedAsync()
+        {
+            await GetGroups();
         }
     }
 }
