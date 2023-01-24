@@ -1,4 +1,6 @@
-﻿using CuratorMagazineBlazorApp.Data.Services;
+﻿using AntDesign.Core.Helpers.MemberPath;
+using CuratorMagazineBlazorApp.Data.Services;
+using CuratorMagazineBlazorApp.Models.States;
 using CuratorMagazineWebAPI.Models.Entities;
 using CuratorMagazineWebAPI.Models.Entities.Domains;
 using Microsoft.AspNetCore.Components;
@@ -15,7 +17,19 @@ namespace CuratorMagazineBlazorApp.Shared.DEW
         [Inject]
         public UserService? UserService { get; set; }
 
+        [Parameter]
+        public StateRoleNavBar? StateRoleNavBar { get; set; } = new();
+
+        [Parameter]
+        public EventCallback<StateRoleNavBar> StateRoleNavBarCallback { get; set; }
+
         private List<User>? _users = new();
+
+        //public void ChangeOnDefaultStateRoleNavBar()
+        //{
+        //    StateRoleNavBar = new StateRoleNavBar() { RoleName = default };
+        //    StateRoleNavBarCallback.InvokeAsync(StateRoleNavBar);
+        //}
 
         void DeleteVDEW(User user)
         {
@@ -34,10 +48,9 @@ namespace CuratorMagazineBlazorApp.Shared.DEW
             _users = JsonConvert.DeserializeObject<List<User>>(users.Result.Items?.ToString() ?? string.Empty);
         }
 
-        //protected override async Task OnInitializedAsync()
-        //{
-        //    await Task.Delay(1);
-        //    await GetVDEW();
-        //}
+        protected override async Task OnInitializedAsync()
+        {
+            await GetVDEW();
+        }
     }
 }

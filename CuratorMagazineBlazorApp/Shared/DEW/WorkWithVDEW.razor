@@ -6,14 +6,20 @@
     <div class="container-fluid">
         <BodySearchBar></BodySearchBar>
         <div class="overflow-auto container scroll" >
-
-            @foreach (var item in _users)
+            @if(CurrentUser != null)
             {
-                if (item.Division == CurrentUser.Division && item.Role.Id == 2)
+                @foreach (var item in _users)
                 {
-                    <IndividualVDEW CurrentUser="item" DeleteVDEW="DeleteVDEW"></IndividualVDEW>
+                    if (item.Division.Name == CurrentUser.Division.Name && item.Role.Name == "admin2")
+                    {
+                        <IndividualVDEW CurrentUser="item" DeleteVDEW="DeleteVDEW"></IndividualVDEW>
+                    }
+
                 }
-                
+            }
+            else
+            {
+                //ChangeOnDefaultStateRoleNavBar();
             }
         </div>
         <div class="row">

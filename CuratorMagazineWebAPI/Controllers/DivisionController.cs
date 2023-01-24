@@ -47,7 +47,6 @@ public class DivisionController : BaseController
     public DivisionController(IDivisionRepository repository/*, IRabbitMqService mqService*/)
     {
         _repository = repository;
-        //_mqService = mqService;
     }
 
     /// <summary>
