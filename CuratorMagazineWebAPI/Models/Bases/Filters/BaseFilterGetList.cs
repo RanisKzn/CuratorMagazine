@@ -22,6 +22,7 @@ public class BaseFilterGetList
     /// The page
     /// </summary>
     private int? _page;
+
     /// <summary>
     /// Gets or sets the query.
     /// </summary>
@@ -37,4 +38,6 @@ public class BaseFilterGetList
         get => _page ?? 1;
         set => _page = value;
     }
+
+    public int? groupId { get; set; }
 }

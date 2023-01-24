@@ -1,9 +1,8 @@
 ﻿using CuratorMagazineBlazorApp.Data.Services;
-using CuratorMagazineWebAPI.Models.Entities;
 using CuratorMagazineWebAPI.Models.Entities.Domains;
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Forms;
 using Newtonsoft.Json;
+using Group = CuratorMagazineWebAPI.Models.Entities.Domains.Group;
 
 namespace CuratorMagazineBlazorApp.Shared.VDEW
 {
@@ -15,7 +14,16 @@ namespace CuratorMagazineBlazorApp.Shared.VDEW
         [Inject]
         public UserService? UserService { get; set; }
 
-        private List<Group>? _groups;
+        [Inject]
+        public GroupService? GroupService { get; set; }
+
+        private List<Group>? Groups { get; set; }
+
+        protected override async Task OnInitializedAsync()
+        {
+            var ret = await GroupService?.PostAsync()!;
+            Groups = JsonConvert.DeserializeObject<List<CuratorMagazineWebAPI.Models.Entities.Domains.Group>>(ret.Result.Items?.ToString() ?? string.Empty);
+        }
 
         void DeleteGroup(Group group)
         {
@@ -28,9 +36,9 @@ namespace CuratorMagazineBlazorApp.Shared.VDEW
         }
         public async Task GetGroups()
         {
-            _groups = new List<Group>();
-            var groups = await UserService.PostAsync();
-            _groups = JsonConvert.DeserializeObject<List<Group>>(groups.Result.Items?.ToString() ?? string.Empty);
+            //Groups = new List<Group>();
+            //var groups = await UserService.PostAsync();
+            //Groups = JsonConvert.DeserializeObject<List<Group>>(groups.Result.Items?.ToString() ?? string.Empty);
         }
         protected override async Task OnInitializedAsync()
         {

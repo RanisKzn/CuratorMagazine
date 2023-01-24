@@ -37,17 +37,16 @@ public class DivisionController : BaseController
     /// <summary>
     /// The mq service
     /// </summary>
-    private readonly IRabbitMqService _mqService;
+    //private readonly IRabbitMqService _mqService;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="DivisionController" /> class.
     /// </summary>
     /// <param name="repository">The repository.</param>
     /// <param name="mqService">The mq service.</param>
-    public DivisionController(IDivisionRepository repository, IRabbitMqService mqService)
+    public DivisionController(IDivisionRepository repository/*, IRabbitMqService mqService*/)
     {
         _repository = repository;
-       // _mqService = mqService;
     }
 
     /// <summary>
