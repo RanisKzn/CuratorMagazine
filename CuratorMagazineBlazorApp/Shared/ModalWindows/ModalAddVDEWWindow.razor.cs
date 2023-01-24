@@ -33,6 +33,8 @@ public partial class ModalAddVDEWWindow
 
     private List<Division>? _divisions = new();
 
+    private string _selectedDivision { get; set; }
+
     /// <summary>
     /// Called when [finish].
     /// </summary>

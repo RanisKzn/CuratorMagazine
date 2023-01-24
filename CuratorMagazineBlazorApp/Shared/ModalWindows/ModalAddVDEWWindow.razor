@@ -33,7 +33,9 @@
                                     <div class="col-ms-10">
                                         <Select Mode="default"
                                                 DataSource="@_divisions"
-                                                @bind-Value="@context.Division"
+                                                TItem="Division"
+                                                TItemValue="string"
+                                                @bind-Value="@_selectedDivision"
                                                 LabelName="@nameof(Division.Name)"
                                                 ValueName="@nameof(Division.Name)">
                                         </Select>
