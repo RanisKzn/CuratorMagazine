@@ -47,7 +47,7 @@ public class DivisionController : BaseController
     public DivisionController(IDivisionRepository repository, IRabbitMqService mqService)
     {
         _repository = repository;
-        _mqService = mqService;
+       // _mqService = mqService;
     }
 
     /// <summary>
@@ -63,7 +63,7 @@ public class DivisionController : BaseController
         if (division == null)
             return NotFound();
 
-        _mqService.SendMessage(division);
+        //_mqService.SendMessage(division);
 
         return division;
     }

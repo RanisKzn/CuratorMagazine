@@ -17,21 +17,5 @@
                 
 
 @code {
-    [Parameter]
-    public User? CurrentUser { get; set; }
-
-    private List<Group>? _groups;
-
-    public async void GetGroups()
-    {
-        _groups = new List<Group>();
-        using (var httpClient = new HttpClient())
-        {
-            using (var response = await httpClient.GetAsync("https://localhost:7217/api/Group"))
-            {
-                var apiResponse = await response.Content.ReadAsStringAsync();
-                _groups = JsonConvert.DeserializeObject<List<Group>>(apiResponse);
-            }
-        }
-    }
+   
 }

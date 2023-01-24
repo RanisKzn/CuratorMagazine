@@ -36,7 +36,7 @@ builder.Services.AddSwaggerGen(options =>
 });
 
 builder.Services.AddPersistence(builder.Configuration);
-builder.Services.AddScoped<IRabbitMqService, RabbitMqService>();
+//builder.Services.AddScoped<IRabbitMqService, RabbitMqService>();
 
 #region Repositories
 builder.Services.AddTransient<IDivisionRepository, DivisionRepository>();

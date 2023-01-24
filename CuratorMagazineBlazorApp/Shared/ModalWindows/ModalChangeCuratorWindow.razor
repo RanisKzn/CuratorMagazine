@@ -15,101 +15,76 @@
             </div>
             <div class="modal-body">
                 <div class="container-fluid">
-                    @*<Form Model="@_model"
-                    OnFinish="OnFinish"
-                    OnFinishFailed="OnFinishFailed"
-                    LabelColSpan="8"
-                    WrapperColSpan="16">
-                    <FormItem>
-                    <Input @bind-Value="@context.Name" />
-                    </FormItem>
-                    <FormItem>
-                    <InputPassword @bind-Value="@context.Password" />
-                    </FormItem>
-                    <FormItem WrapperColOffset="8" WrapperColSpan="16">
-                    <Button Type="@ButtonType.Primary" HtmlType="submit" OnClick="Authorization">
-                    ВОЙТИ
-                    </Button>
-                    </FormItem>
-                    </Form>*@
                     <div class="row">
-                        <div class="col-md-6 text-center">
-                            <img class="img-fluid" src="../img/no-img.jpg" alt="">
-                            <button type="image" class="btn btn-outline-secondary mt-3">Обзор</button>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="inputSurame" class="col-md-2 col-form-label">Фамилия</label>
-                            <div class="col-ms-10">
-                                <input type="text" class="form-control" id="inputSurame">
+                        <Form Model="@_curator"
+                              OnFinish="OnFinish"
+                              OnFinishFailed="OnFinishFailed"
+                              LabelColSpan="8"
+                              WrapperColSpan="16">
+                            <div class="col-md-6">
+                                <FormItem Label="ФИО">
+                                    <div class="col-ms-10">
+                                        <Input @bind-Value="@context.Name" />
+                                    </div>
+                                </FormItem>
                             </div>
-                            <label for="inputName" class="col-md-2 col-form-label">Имя</label>
-                            <div class="col-ms-10">
-                                <input type="text" class="form-control" id="inputName">
+                            <div class="col-md-6">
+                                <FormItem Label="Подразделение">
+                                    <div class="col-ms-10">
+                                        <Select Mode="default"
+                                                DataSource="@_divisions"
+                                                @bind-Value="@context.Division"
+                                                LabelName="@nameof(Division.Name)"
+                                                ValueName="@nameof(Division.Name)">
+                                        </Select>
+                                    </div>
+                                </FormItem>
                             </div>
-                            <label for="inputSecondname" class="col-md-2 col-form-label">Отчество</label>
-                            <div class="col-ms-10">
-                                <input type="text" class="form-control" id="inputSecondname">
+                            <div class="col-md-6">
+                                <FormItem Label="Телефон">
+                                    <div class="col-ms-10">
+                                        <Input @bind-Value="@context.Phone" />
+                                    </div>
+                                </FormItem>
                             </div>
-                            <label for="selectDivision" class="col-md-2 col-form-label">Подразделение</label>
-                            <div class="col-ms-10">
-                                <select class="form-select border-1" id="selectDivision">
-                                    <option selected>Фильтр</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
-                                </select>
+                            <div class="col-md-6">
+                                <FormItem Label="Email">
+                                    <div class="col-ms-10">
+                                        <Input @bind-Value="@context.Email" />
+                                    </div>
+                                </FormItem>
                             </div>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="inputTel" class="col-md-2 col-form-label">Телефон</label>
-                            <div class="col-ms-10">
-                                <input type="tel" class="form-control" id="inputTel">
+                            <div class="col-md-6">
+                                <FormItem Label="Группа">
+                                    <div class="col-ms-10">
+                                        <Input @bind-Value="@context.Group" />
+                                    </div>
+                                </FormItem>
                             </div>
-                            <label for="inputLogin" class="col-md-2 col-form-label">Логин</label>
-                            <div class="col-ms-10">
-                                <input type="text" class="form-control" id="inputLogin">
+                            <div class="col-md-6">
+                                <FormItem Label="Пароль">
+                                    <div class="col-ms-10">
+                                        <Input @bind-Value="@context.Password" />
+                                    </div>
+                                </FormItem>
                             </div>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="inputEmail" class="col-md-2 col-form-label">Email</label>
-                            <div class="col-ms-10">
-                                <input type="email" class="form-control" id="inputEmail">
-                            </div>
-                            <label for="inputPassword" class="col-md-2 col-form-label">Пароль</label>
-                            <div class="col-ms-10">
-                                <input type="text" class="form-control" id="inputPassword">
-                            </div>
-                        </div>
+
+                            <FormItem WrapperColOffset="8" WrapperColSpan="16">
+                                <Button Type="@ButtonType.Primary" HtmlType="submit" OnClick="ChangeCurator">
+                                    Добавить
+                                </Button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                            </FormItem>
+                        </Form>
                     </div>
+
+
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
-                <button type="button" class="btn btn-primary" @onclick="(() => ChangeCurator.InvokeAsync(_curator))">Сохранить</button>
             </div>
         </div>
     </div>
 </div>
 
 @code {
-    private User _curator = new User();
 
-    [Parameter]
-    public EventCallback<User> RoleCallback { get; set; }
-
-    public UserService UserService { get; set; }
-
-    private void OnFinish(EditContext editContext)
-    {
-        Console.WriteLine($"Success:{JsonSerializer.Serialize(_curator)}");
-    }
-
-    private void OnFinishFailed(EditContext editContext)
-    {
-        Console.WriteLine($"Failed:{JsonSerializer.Serialize(_curator)}");
-    }
-
-
-    [Parameter]
-    public EventCallback<User> ChangeCurator { get; set; }
 }
