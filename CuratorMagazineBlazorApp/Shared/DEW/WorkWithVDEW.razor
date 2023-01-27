@@ -5,7 +5,7 @@
 <div class="container my-4 bg-secondary bg-opacity-50">
     <div class="container-fluid">
         <BodySearchBar></BodySearchBar>
-        <div class="overflow-auto container scroll" >
+        <div class="overflow-auto container">
             @if(CurrentUser != null)
             {
                 @if (_users != null)
@@ -17,6 +17,7 @@
                             <IndividualVDEW CurrentUser="@item" DeleteVDEW="@DeleteVDEW"></IndividualVDEW>
                         }
                     }
+                    
                 }
             }
             else

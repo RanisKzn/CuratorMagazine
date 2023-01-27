@@ -1,6 +1,7 @@
-﻿@using CuratorMagazineWebAPI.Models.Entities.Domains
-<div class="row ">
-    <div class="col-md-1">
+﻿@using CuratorMagazineBlazorApp.Shared.ModalWindows
+@using CuratorMagazineWebAPI.Models.Entities.Domains
+<div class="row">
+    <div class="col-1">
         @if (CurrentUser.ProfilePhoto == null)
         {
             <img class="rounded img-fluid" src="../img/no-img.jpg" alt="">
@@ -10,17 +11,16 @@
 
         }
     </div>
-    <div class="col-md-8">
+    <div class="col-8">
         <h5>@CurrentUser.Name</h5>
         <p>@CurrentUser.Email</p>
     </div>
-    <div class="col-md-3 text-end">
+    <div class="col-3 text-end">
         <button type="button" class="btn btn-secondary me-2" data-bs-toggle="modal" data-bs-target="#changeModal">Изменить</button>
         <button type="button" class="btn btn-secondary" @onclick="(() => DeleteVDEW.InvokeAsync(CurrentUser))">Удалить</button>
     </div>
-    <hr>
 </div>
-<ModalChangeVDEWWindow ChangeVDEW="SaveVDEW" CurrentUser="CurrentUser"></ModalChangeVDEWWindow>
+<ModalChangeVDEWWindow _vdew="CurrentUser"></ModalChangeVDEWWindow>
 
 @code {
     [Parameter]
