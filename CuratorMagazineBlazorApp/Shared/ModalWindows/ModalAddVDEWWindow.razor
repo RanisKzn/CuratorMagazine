@@ -15,20 +15,23 @@
             </div>
             <div class="modal-body">
                 <div class="container-fluid">
-                    <div class="row">
-                        <Form Model="@_vdew"
-                              OnFinish="OnFinish"
-                              OnFinishFailed="OnFinishFailed"
-                              LabelColSpan="8"
-                              WrapperColSpan="16">
-                            <div class="col-md-6">
+                    <Form Model="@_vdew"
+                            OnFinish="OnFinish"
+                            OnFinishFailed="OnFinishFailed"
+                            LabelColSpan="8"
+                            WrapperColSpan="16">
+                            <Row >
+                            <GridCol>
+                                <img class="img-thumbnail" height="300px" width="300px" src="../img/no-img.jpg" alt="">
+                                    
+                            </GridCol>
+                                    
+                            <GridCol  Span="13">
                                 <FormItem Label="ФИО">
                                     <div class="col-ms-10">
                                         <Input @bind-Value="@context.Name" />
                                     </div>
                                 </FormItem>
-                            </div>
-                            <div class="col-md-6">
                                 <FormItem Label="Подразделение">
                                     <div class="col-ms-10">
                                         <Select Mode="default"
@@ -41,45 +44,43 @@
                                         </Select>
                                     </div>
                                 </FormItem>
-                            </div>
-                            <div class="col-md-6">
                                 <FormItem Label="Телефон">
                                     <div class="col-ms-10">
                                         <Input @bind-Value="@context.Phone" />
                                     </div>
                                 </FormItem>
-                            </div>
-                            <div class="col-md-6">
                                 <FormItem Label="Email">
                                     <div class="col-ms-10">
                                         <Input @bind-Value="@context.Email" />
                                     </div>
                                 </FormItem>
-                            </div>
-                            <div class="col-md-6">
-                                <FormItem Label="Группа">
-                                    <div class="col-ms-10">
-                                        <Input @bind-Value="@context.Group" />
-                                    </div>
-                                </FormItem>
-                            </div>
-                            <div class="col-md-6">
-                                <FormItem Label="Пароль">
+                            </GridCol>
+                        </Row>
+                        <Row>
+                            <GridCol Span="10" Style="text-align:center;">
+                                <Button type="image" class="btn btn-outline-secondary mt-3">Обзор</Button>
+                            </GridCol>
+                            <GridCol Span="13">
+                            <FormItem Label="Пароль">
                                     <div class="col-ms-10">
                                         <Input @bind-Value="@context.Password" />
                                     </div>
                                 </FormItem>
-                            </div>
-
-                            <FormItem WrapperColOffset="8" WrapperColSpan="16">
-                                <Button Type="@ButtonType.Primary" HtmlType="submit" OnClick="@AddVDEW">
-                                    Добавить
-                                </Button>
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
-                            </FormItem>
-                        </Form>
-                    </div>
-
+                            </GridCol>
+                        </Row>
+                        <Row>
+                            <GridCol Span="24" Style="text-align:right;">
+                                <FormItem WrapperColOffset="8" WrapperColSpan="16">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                        Отмена
+                                    </button>
+                                    <Button Type="@ButtonType.Primary" HtmlType="submit" Style="height: 37px" OnClick="@AddVDEW">
+                                        Добавить
+                                    </Button>
+                                </FormItem>
+                            </GridCol>
+                        </Row>
+                    </Form>
 
                 </div>
             </div>
