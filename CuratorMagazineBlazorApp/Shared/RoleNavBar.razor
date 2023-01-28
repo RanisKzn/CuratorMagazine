@@ -1,49 +1,45 @@
-﻿@using CuratorMagazineWebAPI.Models.Entities
-@using CuratorMagazineBlazorApp.Models.States
-@using CuratorMagazineWebAPI.Models.Entities.Domains
-@if (CurrentUser?.RoleId == 1)
+﻿@switch (CurrentUser?.RoleId)
 {
-    <div class="collapse" id="navbarToggleExternalContent">
-        <ul class="nav nav-pills nav-fill bg-secondary bg-opacity-50">
-            <li class="nav-item">
-                <a class="nav-link text-white" @onclick="ChangeOnWorkWithVDEWStateRoleNavBar">РАБОТА С ЗАМЕСТИТЕЛЕМ ДИРКЕТОРА ВР</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white" @onclick="ChangeOnStatsCollectStateRoleNavBar">СБОР СТАТИСТИКИ</a>
-            </li>
-        </ul>
-    </div>
+    case 1:
+        <div class="collapse" id="navbarToggleExternalContent">
+            <ul class="nav nav-pills nav-fill bg-secondary bg-opacity-50">
+                <li class="nav-item">
+                    <a class="nav-link text-white" @onclick="@ChangeOnWorkWithVDEWStateRoleNavBar">РАБОТА С ЗАМЕСТИТЕЛЕМ ДИРКЕТОРА ВР</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" @onclick="@ChangeOnStatsCollectStateRoleNavBar">СБОР СТАТИСТИКИ</a>
+                </li>
+            </ul>
+        </div>
+        break;
+    case 2:
+        <div class="collapse" id="navbarToggleExternalContent">
+            <ul class="nav nav-pills nav-fill bg-secondary bg-opacity-50">
+                <li class="nav-item">
+                    <a class="nav-link text-white" @onclick="@ChangeOnWorkWithGroupVDEWStateRoleNavBar">РАБОТА С ГРУППОЙ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" @onclick="@ChangeOnWorkWithCuratorVDEWStateRoleNavBar">РАБОТА С КУРАТОРОМ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" @onclick="@ChangeOnStatsCollectStateRoleNavBar">СБОР СТАТИСТИКИ</a>
+                </li>
+            </ul>
+        </div>
+        break;
+    case 3:
+        <div class="collapse" id="navbarToggleExternalContent">
+            <ul class="nav nav-pills nav-fill bg-secondary bg-opacity-50">
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="../Curator/cur1.html">РАБОТА С ГРУППОЙ</a>
+                </li>
+            </ul>
+        </div>
+        break;
+    default:
+        break;
 }
-else if (CurrentUser?.RoleId == 2)
-{
-    <div class="collapse" id="navbarToggleExternalContent">
-        <ul class="nav nav-pills nav-fill bg-secondary bg-opacity-50">
-            <li class="nav-item">
-                <a class="nav-link text-white" @onclick="ChangeOnWorkWithGroupVDEWStateRoleNavBar">РАБОТА С ГРУППОЙ</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white" @onclick="ChangeOnWorkWithCuratorVDEWStateRoleNavBar">РАБОТА С КУРАТОРОМ</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white" @onclick="ChangeOnStatsCollectStateRoleNavBar">СБОР СТАТИСТИКИ</a>
-            </li>
-        </ul>
-    </div>
-}
-else if (CurrentUser?.RoleId == 3)
-{
-    <div class="collapse" id="navbarToggleExternalContent">
-        <ul class="nav nav-pills nav-fill bg-secondary bg-opacity-50">
-            <li class="nav-item">
-                <a class="nav-link text-white" href="../Curator/cur1.html">РАБОТА С ГРУППОЙ</a>
-            </li>
-        </ul>
-    </div>
-}
-else
-{
 
-}
 @code {
     [Parameter]
     public User? CurrentUser { get; set; }

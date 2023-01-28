@@ -11,7 +11,7 @@ namespace CuratorMagazineBlazorApp.Shared.ModalWindows;
 /// Implements the <see cref="ComponentBase" />
 /// </summary>
 /// <seealso cref="ComponentBase" />
-public partial class ModalAddVDEWWindow
+public partial class AddVDEWModalWindow
 {
     /// <summary>
     /// The vdew

@@ -1,22 +1,24 @@
 ﻿using CuratorMagazineBlazorApp.Data.Services;
 using CuratorMagazineWebAPI.Models.Entities.Domains;
-using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
+using Microsoft.AspNetCore.Components;
 using Newtonsoft.Json;
 
 namespace CuratorMagazineBlazorApp.Shared.ModalWindows;
 
 /// <summary>
-/// Class ModalWindowEnter.
+/// Class ChangeCuratorModalWindow.
 /// Implements the <see cref="ComponentBase" />
 /// </summary>
 /// <seealso cref="ComponentBase" />
-public partial class ModalWindowEnter
+public partial class ChangeCuratorModalWindow
 {
     /// <summary>
-    /// The model
+    /// Gets or sets the curator.
     /// </summary>
-    private User _model = new();
+    /// <value>The curator.</value>
+    [Parameter]
+    public User? Curator { get; set; }
 
     /// <summary>
     /// Gets or sets the role callback.
@@ -40,12 +42,17 @@ public partial class ModalWindowEnter
     public NavigationManager NavigationManager { get; set; } = null!;
 
     /// <summary>
+    /// The divisions
+    /// </summary>
+    private List<Division>? _divisions;
+
+    /// <summary>
     /// Called when [finish].
     /// </summary>
     /// <param name="editContext">The edit context.</param>
     private void OnFinish(EditContext editContext)
     {
-        Console.WriteLine($"Success: {JsonConvert.SerializeObject(_model)}");
+        Console.WriteLine($"Success: {JsonConvert.SerializeObject(Curator)}");
     }
 
     /// <summary>
@@ -54,37 +61,14 @@ public partial class ModalWindowEnter
     /// <param name="editContext">The edit context.</param>
     private void OnFinishFailed(EditContext editContext)
     {
-        Console.WriteLine($"Failed: {JsonConvert.SerializeObject(_model)}");
+        Console.WriteLine($"Failed: {JsonConvert.SerializeObject(Curator)}");
     }
 
     /// <summary>
-    /// Authorizations this instance.
+    /// Changes the curator.
     /// </summary>
-    public async void Authorization()
+    private void ChangeCurator()
     {
-        var users = await UserService?.PostAsync()!;
-        var list = JsonConvert.DeserializeObject<List<User>>(users.Result.Items?.ToString() ?? string.Empty);
 
-        await FindUser(list);
-
-        //if (_model.Role?.Name == "Администратор")
-        //{
-        //    NavigationManager.NavigateTo($"admin", true);
-        //}
-
-        await RoleCallback.InvokeAsync(_model);
-    }
-
-    /// <summary>
-    /// Finds the user.
-    /// </summary>
-    /// <param name="list">The list.</param>
-    private async Task FindUser(List<User>? list)
-    {
-        if (list != null)
-            foreach (var user in list.Where(user => user.Name == _model.Name && user.Password == _model.Password))
-            {
-                _model = user;
-            }
     }
 }

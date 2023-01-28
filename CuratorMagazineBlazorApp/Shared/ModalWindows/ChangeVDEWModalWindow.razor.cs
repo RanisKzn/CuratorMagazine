@@ -11,9 +11,10 @@ namespace CuratorMagazineBlazorApp.Shared.ModalWindows;
 /// Implements the <see cref="ComponentBase" />
 /// </summary>
 /// <seealso cref="ComponentBase" />
-public partial class ModalChangeVDEWWindow
+public partial class ChangeVDEWModalWindow
 {
-    private User? User { get; set; } = new User();
+    [Parameter]
+    public User? CurrentUser { get; set; }
 
     /// <summary>
     /// Gets or sets the division service.
@@ -33,7 +34,7 @@ public partial class ModalChangeVDEWWindow
     /// <param name="editContext">The edit context.</param>
     private void OnFinish(EditContext editContext)
     {
-        Console.WriteLine($"Success: {JsonConvert.SerializeObject(User)}");
+        Console.WriteLine($"Success: {JsonConvert.SerializeObject(CurrentUser)}");
     }
 
     /// <summary>
@@ -42,7 +43,7 @@ public partial class ModalChangeVDEWWindow
     /// <param name="editContext">The edit context.</param>
     private void OnFinishFailed(EditContext editContext)
     {
-        Console.WriteLine($"Failed: {JsonConvert.SerializeObject(User)}");
+        Console.WriteLine($"Failed: {JsonConvert.SerializeObject(CurrentUser)}");
 
     }
 

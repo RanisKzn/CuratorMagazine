@@ -1,5 +1,4 @@
-﻿@using CuratorMagazineBlazorApp.Shared.ModalWindows
-<div class="container my-4 bg-secondary bg-opacity-50">
+﻿<div class="container my-4 bg-secondary bg-opacity-50">
     <div class="container-fluid">
         <BodySearchBar></BodySearchBar>
        <div class="overflow-auto container scroll">
@@ -12,13 +11,8 @@
             <div class="row-md text-center mb-2">
                 <hr>
                 <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#addModal">Добавить</button>
-                <ModalAddCuratorWindow AddCurator="AddCurator"></ModalAddCuratorWindow>
-
+                <AddCuratorModalWindow AddCurator="AddCurator"></AddCuratorModalWindow>
             </div>
         </div>
     </div>
 </div>
-
-@code {
-
-}

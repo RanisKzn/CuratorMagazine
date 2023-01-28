@@ -1,8 +1,4 @@
-﻿@using CuratorMagazineBlazorApp.Shared.Curator
-@using CuratorMagazineWebAPI.Models.Entities.Domains
-@using CuratorMagazineBlazorApp.Data.Services
-
-<div class="row mt-3 group rounded" >
+﻿<div class="row mt-3 group rounded" >
     <div class="col-md-1">
         <img class="rounded img-fluid mt-1" src="../img/no-img.jpg" alt="">
     </div>
@@ -12,7 +8,7 @@
         @*Пометка придумать как достать куратора*@
         
     </div>
-    @if (CurrentUser.Role.Name == "admin3")
+    @if (CurrentUser?.Role?.Name == "admin3")
     {
         <div class="col-md-3 text-end mt-3">
             <a href="../Curator/cur3.html" type="button" class="btn btn-secondary me-2">Изменить</a>

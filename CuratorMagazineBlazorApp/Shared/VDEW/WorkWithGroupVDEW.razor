@@ -1,8 +1,4 @@
-﻿@using CuratorMagazineBlazorApp.Data.Services
-@using CuratorMagazineBlazorApp.Shared.ModalWindows
-@using CuratorMagazineWebAPI.Models.Entities.Domains
-
-<div class="container my-4 bg-secondary bg-opacity-50">
+﻿<div class="container my-4 bg-secondary bg-opacity-50">
     <div class="container-fluid">
         <BodySearchBar></BodySearchBar>
         <div class="overflow-auto container scroll">
@@ -10,7 +6,7 @@
             {
                 @foreach (var item in Groups!)
                 {
-                    <IndividualGroupVDEW group="item"></IndividualGroupVDEW>
+                    <IndividualGroupVDEW Group="item"></IndividualGroupVDEW>
                 }
             }
         </div>
@@ -18,8 +14,7 @@
             <div class="row-md text-center mb-2">
                 <hr>
                 <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#addModal">Добавить</button>
-                <ModalAddGroupWindow AddGroup="AddGroup"></ModalAddGroupWindow>
-
+                <AddGroupModalWindow AddGroup="AddGroup"></AddGroupModalWindow>
             </div>
         </div>
     </div>

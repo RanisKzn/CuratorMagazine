@@ -1,14 +1,10 @@
-﻿@using CuratorMagazineBlazorApp.Shared.ModalWindows
-@using CuratorMagazineWebAPI.Models.Entities.Domains
-@using CuratorMagazineBlazorApp.Data.Services
-
-<ModalChangeGroupWindow ></ModalChangeGroupWindow>
+﻿<ChangeGroupModalWindow ></ChangeGroupModalWindow>
 <div class="row mt-3 group rounded">
     <div class="col-md-1">
         <img class="rounded img-fluid mt-1" src="../img/no-img.jpg" alt="">
     </div>
     <div class="col-md-8 mt-1">
-        <h5><a class="text-dark" style="text-decoration: none;">@group.Name</a></h5>
+        <h5><a class="text-dark" style="text-decoration: none;">@Group.Name</a></h5>
         
         <p ></p>
         @*Пометка придумать как достать куратора*@
@@ -23,10 +19,10 @@
 
 @code {
     [Parameter]
-    public Group? group { get; set; }
+    public Group? Group { get; set; }
 
     [Inject]
     public GroupService? GroupService { get; set; }
 
-    public User? User => GroupService?.GetGroupCuratorAsync(group!.Id).Result.Result;
+    public User? User => GroupService?.GetGroupCuratorAsync(Group!.Id).Result.Result;
 }

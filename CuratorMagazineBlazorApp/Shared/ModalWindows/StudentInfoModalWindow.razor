@@ -1,5 +1,4 @@
-﻿@using CuratorMagazineWebAPI.Models.Entities.Domains
-<div class="modal fade" aria-labelledby="studInfoModelLabel" aria-hidden="true" tabindex="-1" id="studInfoModal">
+﻿<div class="modal fade" aria-labelledby="studInfoModelLabel" aria-hidden="true" tabindex="-1" id="studInfoModal">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header text-center">
@@ -13,12 +12,12 @@
                             <img class="img-fluid" src="../img/no-img.jpg" alt="">
                         </div>
                         <div class="col-md-6 text-start">
-                            <h5>@Student.Name</h5>
-                            <h5>@Student.BirthDate</h5>
+                            <h5>@Student?.Name</h5>
+                            <h5>@Student!.BirthDate</h5>
                             <h5>@Student.Phone</h5>
                             <h5>@Student.Address</h5>
-                            <h5>@Student.Mother.Name</h5>
-                            <h5>@Student.Father.Name</h5>
+                            <h5>@Student.Mother?.Name</h5>
+                            <h5>@Student.Father?.Name</h5>
                         </div>
                     </div>
                 </div>

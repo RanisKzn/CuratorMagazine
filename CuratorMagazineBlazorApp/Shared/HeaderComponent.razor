@@ -1,11 +1,7 @@
-﻿@using CuratorMagazineBlazorApp.Shared.ModalWindows
-@using CuratorMagazineWebAPI.Models.Entities
-@using CuratorMagazineBlazorApp.Models.States
-@using CuratorMagazineWebAPI.Models.Entities.Domains
-<header  class="container">
+﻿<header  class="container">
     <MainHeader CurrentUser="@CurrentUser"></MainHeader>
-    <ModalWindowEnter RoleCallback="@SetUser"></ModalWindowEnter>
-    <ModalExitWindow UserNullCallback="@SetUserNull" ></ModalExitWindow>
+    <EnterModalWindow RoleCallback="@SetUser"></EnterModalWindow>
+    <ExitModalWindow UserNullCallback="@SetUserNull"></ExitModalWindow>
     <NavBar></NavBar>
     <RoleNavBar CurrentUser="@CurrentUser" StateRoleNavBar="@StateRoleNavBar"  StateRoleNavBarCallback="@SetStateRoleNavBar"></RoleNavBar>
     <MainBody CurrentUser="@CurrentUser" StateRoleNavBar="@StateRoleNavBar"></MainBody>

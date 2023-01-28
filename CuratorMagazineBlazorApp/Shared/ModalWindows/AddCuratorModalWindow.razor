@@ -1,12 +1,4 @@
-﻿@using CuratorMagazineWebAPI.Models.Entities
-@using Microsoft.AspNetCore.Components
-@using Newtonsoft.Json
-@using JsonSerializer = System.Text.Json.JsonSerializer
-@using CuratorMagazineBlazorApp.Data.Services
-@using CuratorMagazineWebAPI.Models.Entities.Domains
-
-
-<div class="modal fade" aria-labelledby="addModelLabel" style="display: none;" aria-hidden="true" tabindex="-1" id="addModal">
+﻿<div class="modal fade" aria-labelledby="addModelLabel" style="display: none;" aria-hidden="true" tabindex="-1" id="addModal">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header text-center">
@@ -68,17 +60,17 @@
                                     </div>
                                 </FormItem>
                             </div>
-
+                         
                             <FormItem WrapperColOffset="8" WrapperColSpan="16">
-                                <Button Type="@ButtonType.Primary" HtmlType="submit" OnClick="ChangeCurator">
+                                <Button Type="@ButtonType.Primary" HtmlType="submit" OnClick="AddCurator">
                                     Добавить
                                 </Button>
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
                             </FormItem>
                         </Form>
                     </div>
-
-
+                    
+                   
                 </div>
             </div>
         </div>
@@ -86,5 +78,5 @@
 </div>
 
 @code {
-
+    
 }
