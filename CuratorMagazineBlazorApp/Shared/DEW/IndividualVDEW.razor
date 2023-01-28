@@ -16,11 +16,14 @@
         <p>@CurrentUser.Email</p>
     </div>
     <div class="col-3 text-end">
-        <button type="button" class="btn btn-secondary me-2" data-bs-toggle="modal" data-bs-target="#changeModal">Изменить</button>
+        <button type="button" class="btn btn-secondary me-2" data-bs-toggle="modal" data-bs-target="#changeModal" @onclick="ChangeVisible">Изменить</button>
         <button type="button" class="btn btn-secondary" @onclick="(() => DeleteVDEW.InvokeAsync(CurrentUser))">Удалить</button>
     </div>
 </div>
-<ModalChangeVDEWWindow _vdew="CurrentUser"></ModalChangeVDEWWindow>
+@if (IsVisibleModalChangeVdewWindow)
+{
+    <ModalChangeVDEWWindow></ModalChangeVDEWWindow>
+}
 
 @code {
     [Parameter]
@@ -28,6 +31,20 @@
 
     [Parameter] 
     public EventCallback<User> DeleteVDEW { get; set; }
+
+    private bool IsVisibleModalChangeVdewWindow { get; set; }
+
+    public void ChangeVisible()
+    {
+        if (IsVisibleModalChangeVdewWindow)
+        {
+            IsVisibleModalChangeVdewWindow = false;
+        }
+        else
+        {
+            IsVisibleModalChangeVdewWindow = true;
+        }
+    }
 
     void SaveVDEW(User user)
     {

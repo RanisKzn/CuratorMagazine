@@ -1,12 +1,4 @@
-﻿@using CuratorMagazineWebAPI.Models.Entities
-@using Microsoft.AspNetCore.Components
-@using Newtonsoft.Json
-@using JsonSerializer = System.Text.Json.JsonSerializer
-@using CuratorMagazineBlazorApp.Data.Services
-@using CuratorMagazineWebAPI.Models.Entities.Domains
-
-
-<div class="modal fade" aria-labelledby="addModelLabel" style="display: none;" aria-hidden="true" tabindex="-1" id="addModal">
+﻿<div class="modal fade" aria-labelledby="addModelLabel" style="display: none;" aria-hidden="true" tabindex="-1" id="addModal">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header text-center">
@@ -20,10 +12,9 @@
                             OnFinishFailed="OnFinishFailed"
                             LabelColSpan="8"
                             WrapperColSpan="16">
-                            <Row >
+                            <Row>
                             <GridCol>
                                 <img class="img-thumbnail" height="300px" width="300px" src="../img/no-img.jpg" alt="">
-                                    
                             </GridCol>
                                     
                             <GridCol  Span="13">
@@ -38,7 +29,7 @@
                                                 DataSource="@_divisions"
                                                 TItem="Division"
                                                 TItemValue="string"
-                                                @bind-Value="@_selectedDivision"
+                                                @bind-Value="@SelectedDivision"
                                                 LabelName="@nameof(Division.Name)"
                                                 ValueName="@nameof(Division.Name)">
                                         </Select>
@@ -74,14 +65,13 @@
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                                         Отмена
                                     </button>
-                                    <Button Type="@ButtonType.Primary" HtmlType="submit" Style="height: 37px" OnClick="@AddVDEW">
+                                    <Button Type="@ButtonType.Primary" HtmlType="submit" Style="height: 37px" OnClick="@AddVDEWAsync">
                                         Добавить
                                     </Button>
                                 </FormItem>
                             </GridCol>
                         </Row>
                     </Form>
-
                 </div>
             </div>
         </div>

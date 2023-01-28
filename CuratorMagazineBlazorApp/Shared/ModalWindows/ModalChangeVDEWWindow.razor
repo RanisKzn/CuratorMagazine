@@ -1,12 +1,4 @@
-﻿@using CuratorMagazineWebAPI.Models.Entities
-@using Microsoft.AspNetCore.Components
-@using Newtonsoft.Json
-@using JsonSerializer = System.Text.Json.JsonSerializer
-@using CuratorMagazineBlazorApp.Data.Services
-@using CuratorMagazineWebAPI.Models.Entities.Domains
-
-
-<div class="modal fade" aria-labelledby="addModelLabel" style="display: none;" aria-hidden="true" tabindex="-1" id="changeModal">
+﻿<div class="modal fade" aria-labelledby="addModelLabel" style="display: none;" aria-hidden="true" tabindex="-1" id="changeModal">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header text-center">
@@ -15,7 +7,8 @@
             </div>
             <div class="modal-body">
                 <div class="container-fluid">
-                    <Form Model="@_vdew"
+                    @*todo: Возникает исключение в данном учатке*@ 
+                    @*<Form Model="@User"
                           OnFinish="OnFinish"
                           OnFinishFailed="OnFinishFailed"
                           LabelColSpan="8"
@@ -23,7 +16,6 @@
                         <Row>
                             <GridCol>
                                 <img class="img-thumbnail" height="300px" width="300px" src="../img/no-img.jpg" alt="">
-
                             </GridCol>
 
                             <GridCol Span="13">
@@ -80,15 +72,11 @@
                                 </FormItem>
                             </GridCol>
                         </Row>
-                    </Form>
+                    </Form>*@
 
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-@code {
-
-}
 
