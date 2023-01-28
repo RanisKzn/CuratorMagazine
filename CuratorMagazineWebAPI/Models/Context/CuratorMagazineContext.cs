@@ -1,20 +1,8 @@
-﻿// ***********************************************************************
-// Assembly         : CuratorMagazineWebAPI
-// Author           : Zaid
-// Created          : 11-03-2022
-//
-// Last Modified By : Zaid
-// Last Modified On : 12-22-2022
-// ***********************************************************************
-// <copyright file="CuratorMagazineContext.cs" company="CuratorMagazineWebAPI">
-//     Zaid97-kai
-// </copyright>
-// <summary></summary>
-// ***********************************************************************
-using CuratorMagazineWebAPI.Models.Entities;
-using CuratorMagazineWebAPI.Models.Entities.Domains;
+﻿using CuratorMagazineWebAPI.Models.Entities.Domains;
 using CuratorMagazineWebAPI.Models.EntityTypeConfigurations;
 using Microsoft.EntityFrameworkCore;
+using System.IO;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 using DataProtectionKey = Microsoft.AspNetCore.DataProtection.EntityFrameworkCore.DataProtectionKey;
 
 namespace CuratorMagazineWebAPI.Models.Context
@@ -28,14 +16,13 @@ namespace CuratorMagazineWebAPI.Models.Context
     /// <seealso cref="DbContext" />
     /// <seealso cref="CuratorMagazineWebAPI.Models.Context.ICuratorMagazineContext" />
     /// <seealso cref="Microsoft.AspNetCore.DataProtection.EntityFrameworkCore.IDataProtectionKeyContext" />
-    public class CuratorMagazineContext : DbContext, ICuratorMagazineContext, Microsoft.AspNetCore.DataProtection.EntityFrameworkCore.IDataProtectionKeyContext
+    public sealed class CuratorMagazineContext : DbContext, ICuratorMagazineContext, Microsoft.AspNetCore.DataProtection.EntityFrameworkCore.IDataProtectionKeyContext
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="CuratorMagazineContext" /> class.
         /// </summary>
         /// <param name="options">The options.</param>
-        public CuratorMagazineContext(DbContextOptions<CuratorMagazineContext> options)
-            : base(options)
+        public CuratorMagazineContext(DbContextOptions<CuratorMagazineContext> options) : base(options)
         {
             Database.EnsureCreated();
         }
@@ -58,6 +45,195 @@ namespace CuratorMagazineWebAPI.Models.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new UserConfiguration());
+
+            #region Roles
+
+            var administratorRole = new Role()
+            {
+                Id = 1,
+                Name = "Administrator"
+            };
+
+            var deputyDirectorRole = new Role()
+            {
+                Id = 2,
+                Name = "Deputy Director"
+            };
+
+            var curatorRole = new Role()
+            {
+                Id = 3,
+                Name = "Curator"
+            };
+
+            #endregion
+
+            #region Divisions
+
+            var firstDivision = new Division()
+            {
+                Id = 1,
+                Name = "УВР"
+            };
+
+            var secondDivision = new Division()
+            {
+                Id = 2,
+                Name = "ИАНТЭ"
+            };
+
+            var thirdDivision = new Division()
+            {
+                Id = 3,
+                Name = "ФМФ"
+            };
+
+            var fourthDivision = new Division()
+            {
+                Id = 4,
+                Name = "ИАЭП"
+            };
+
+            var fifthDivision = new Division()
+            {
+                Id = 5,
+                Name = "ИКТЗИ"
+            };
+
+            var sixthDivision = new Division()
+            {
+                Id = 6,
+                Name = "КИТ"
+            };
+
+            var seventhDivision = new Division()
+            {
+                Id = 7,
+                Name = "ТК"
+            };
+
+            #endregion
+
+            #region Groups
+
+            var firstGroup = new Group()
+            {
+                Id = 1,
+                Name = "4101"
+            };
+
+            var secondGroup = new Group()
+            {
+                Id = 2,
+                Name = "4102"
+            };
+
+            var thirdGroup = new Group()
+            {
+                Id = 3,
+                Name = "4131"
+            };
+
+            var fourthGroup = new Group()
+            {
+                Id = 4,
+                Name = "4132"
+            };
+
+            var fifthGroup = new Group()
+            {
+                Id = 5,
+                Name = "3101"
+            };
+
+            var sixthGroup = new Group()
+            {
+                Id = 6,
+                Name = "3101"
+            };
+
+            var seventhGroup = new Group()
+            {
+                Id = 7,
+                Name = "2101"
+            };
+
+            #endregion
+
+            #region Parents
+
+            var firstParent = new Parent()
+            {
+                Id = 1,
+                Name = "Иванов Иван Иванович",
+                Phone = "3(67)992-09-22",
+                WorkName = "Ассистент менеджера по продажам"
+            };
+            
+            var secondParent = new Parent()
+            {
+                Id = 2,
+                Name = "Иванова Инна Ивановна",
+                Phone = "429(521)755-17-83",
+                WorkName = "Преподаватель"
+            };
+
+            #endregion
+
+            #region Users
+
+            var firstUser = new User()
+            {
+                Id = 1,
+                Name = "Administrator",
+                Phone = "9(421)001-31-15",
+                Address = "342340, Волгоградская область, город Москва, пл. Ленина, 80",
+                //BirthDate = new DateTime(2001, 2, 1),
+                //Division = firstDivision,
+                DivisionId = firstDivision.Id,
+                Email = "ripogroyippe-2863@yopmail.com",
+                Password = "Administrator",
+                RoleId = administratorRole.Id
+            };
+            
+            var secondUser = new User()
+            {
+                Id = 2,
+                Name = "Associate Director",
+                Phone = "608(51)713-94-41",
+                Address = "383478, Брянская область, город Люберцы, ул. Ломоносова, 72",
+                //BirthDate = new DateTime(2002, 3, 1),
+                //Division = sixthDivision,
+                DivisionId = sixthDivision.Id,
+                Email = "croummauroicegeu-1550@yopmail.com",
+                Password = "Associate Director",
+                RoleId = deputyDirectorRole.Id
+            };
+            
+            var thirdUser = new User()
+            {
+                Id = 3,
+                Name = "Рахимов Ранис Рамилевич",
+                Phone = "9(421)001-31-15",
+                Address = "342340, Волгоградская область, город Москва, пл. Ленина, 80",
+                //BirthDate = new DateTime(2003, 11, 20),
+                //Division = sixthDivision,
+                DivisionId = sixthDivision.Id,
+                Email = "treledoddoiseu-5434@yopmail.com",
+                Password = "Рахимов Ранис Рамилевич",
+                RoleId = curatorRole.Id,
+                GroupId = fourthGroup.Id,
+                FatherId = firstParent.Id,
+                MotherId = secondParent.Id
+            };
+
+            #endregion
+
+            modelBuilder.Entity<Role>().HasData(administratorRole, deputyDirectorRole, curatorRole);
+            modelBuilder.Entity<Division>().HasData(firstDivision, secondDivision, thirdDivision, fourthDivision, fifthDivision, sixthDivision, seventhDivision);
+            modelBuilder.Entity<Group>().HasData(firstGroup, secondGroup, thirdGroup, fourthGroup, fifthGroup, sixthGroup, seventhGroup);
+            modelBuilder.Entity<Parent>().HasData(firstParent, secondParent);
+            modelBuilder.Entity<User>().HasData(firstUser, secondUser, thirdUser);
 
             base.OnModelCreating(modelBuilder);
         }
@@ -93,21 +269,25 @@ namespace CuratorMagazineWebAPI.Models.Context
         /// </summary>
         /// <value>The users.</value>
         public DbSet<User> Users { get; set; }
+
         /// <summary>
         /// Gets or sets the divisions.
         /// </summary>
         /// <value>The divisions.</value>
         public DbSet<Division> Divisions { get; set; }
+
         /// <summary>
         /// Gets or sets the groups.
         /// </summary>
         /// <value>The groups.</value>
         public DbSet<Group> Groups { get; set; }
+
         /// <summary>
         /// Gets or sets the parents.
         /// </summary>
         /// <value>The parents.</value>
         public DbSet<Parent> Parents { get; set; }
+
         /// <summary>
         /// Gets or sets the roles.
         /// </summary>

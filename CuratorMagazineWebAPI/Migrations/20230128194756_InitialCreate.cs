@@ -1,17 +1,4 @@
-﻿// ***********************************************************************
-// Assembly         : CuratorMagazineWebAPI
-// Author           : Zaid
-// Created          : 12-22-2022
-//
-// Last Modified By : Zaid
-// Last Modified On : 12-22-2022
-// ***********************************************************************
-// <copyright file="20221222115831_AddTables.cs" company="CuratorMagazineWebAPI">
-//     Zaid97-kai
-// </copyright>
-// <summary></summary>
-// ***********************************************************************
-using System;
+﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -19,27 +6,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace CuratorMagazineWebAPI.Migrations
 {
-    /// <summary>
-    /// Class AddTables.
-    /// Implements the <see cref="Migration" />
-    /// </summary>
-    /// <seealso cref="Migration" />
-    public partial class AddTables : Migration
+    public partial class InitialCreate : Migration
     {
-        /// <summary>
-        /// <para>
-        /// Builds the operations that will migrate the database 'up'.
-        /// </para>
-        /// <para>
-        /// That is, builds the operations that will take the database from the state left in by the
-        /// previous migration so that it is up-to-date with regard to this migration.
-        /// </para>
-        /// <para>
-        /// This method must be overridden in each class that inherits from <see cref="T:Microsoft.EntityFrameworkCore.Migrations.Migration" />.
-        /// </para>
-        /// </summary>
-        /// <param name="migrationBuilder">The <see cref="T:Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder" /> that will build the operations.</param>
-        /// <remarks>See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more information.</remarks>
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
@@ -164,6 +132,63 @@ namespace CuratorMagazineWebAPI.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.InsertData(
+                table: "Divisions",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 1, "УВР" },
+                    { 2, "ИАНТЭ" },
+                    { 3, "ФМФ" },
+                    { 4, "ИАЭП" },
+                    { 5, "ИКТЗИ" },
+                    { 6, "КИТ" },
+                    { 7, "ТК" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Groups",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 1, "4101" },
+                    { 2, "4102" },
+                    { 3, "4131" },
+                    { 4, "4132" },
+                    { 5, "3101" },
+                    { 6, "3101" },
+                    { 7, "2101" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Parents",
+                columns: new[] { "Id", "Name", "Phone", "WorkName" },
+                values: new object[,]
+                {
+                    { 1, "Иванов Иван Иванович", "3(67)992-09-22", "Ассистент менеджера по продажам" },
+                    { 2, "Иванова Инна Ивановна", "429(521)755-17-83", "Преподаватель" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Roles",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 1, "Administrator" },
+                    { 2, "Deputy Director" },
+                    { 3, "Curator" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "Id", "Address", "BirthDate", "DivisionId", "Email", "FatherId", "GroupId", "MotherId", "Name", "Password", "Phone", "ProfilePhoto", "RoleId" },
+                values: new object[,]
+                {
+                    { 1, "342340, Волгоградская область, город Москва, пл. Ленина, 80", null, 1, "ripogroyippe-2863@yopmail.com", null, null, null, "Administrator", "Administrator", "9(421)001-31-15", null, 1 },
+                    { 2, "383478, Брянская область, город Люберцы, ул. Ломоносова, 72", null, 6, "croummauroicegeu-1550@yopmail.com", null, null, null, "Associate Director", "Associate Director", "608(51)713-94-41", null, 2 },
+                    { 3, "342340, Волгоградская область, город Москва, пл. Ленина, 80", null, 6, "treledoddoiseu-5434@yopmail.com", 1, 4, 2, "Рахимов Ранис Рамилевич", "Рахимов Ранис Рамилевич", "9(421)001-31-15", null, 3 }
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Users_DivisionId",
                 table: "Users",
@@ -190,10 +215,6 @@ namespace CuratorMagazineWebAPI.Migrations
                 column: "RoleId");
         }
 
-        /// <summary>
-        /// Downs the specified migration builder.
-        /// </summary>
-        /// <param name="migrationBuilder">The migration builder.</param>
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
