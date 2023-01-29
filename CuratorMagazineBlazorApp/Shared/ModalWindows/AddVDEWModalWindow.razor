@@ -1,4 +1,5 @@
-﻿<div class="modal fade" aria-labelledby="addModelLabel" style="display: none;" aria-hidden="true" tabindex="-1" id="addModal">
+﻿@using CuratorMagazineWebAPI.Models.Entities.Domains
+<div class="modal fade" aria-labelledby="addModelLabel" style="display: none;" aria-hidden="true" tabindex="-1" id="addModal">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header text-center">
@@ -12,7 +13,7 @@
                             OnFinishFailed="OnFinishFailed"
                             LabelColSpan="8"
                             WrapperColSpan="16">
-                            <Row>
+                        <Row>
                             <GridCol>
                                 <img class="img-thumbnail" height="300px" width="300px" src="../img/no-img.jpg" alt="">
                             </GridCol>

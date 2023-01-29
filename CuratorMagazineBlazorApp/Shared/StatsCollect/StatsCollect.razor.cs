@@ -16,7 +16,7 @@ namespace CuratorMagazineBlazorApp.Shared.StatsCollect
         public User? CurrentUser { get; set; }
 
         [Inject]
-        public UserService? UserService { get; set; }
+        public GroupService? GroupService { get; set; }
 
         [Parameter]
         public StateRoleNavBar? StateRoleNavBar { get; set; } = new();
@@ -29,7 +29,7 @@ namespace CuratorMagazineBlazorApp.Shared.StatsCollect
         public async Task GetGroups()
         {
             _groups = new List<Group>();
-            var groups = await UserService.PostAsync();
+            var groups = await GroupService.PostAsync();
             _groups = JsonConvert.DeserializeObject<List<Group>>(groups.Result.Items?.ToString() ?? string.Empty);
         }
         protected override async Task OnInitializedAsync()

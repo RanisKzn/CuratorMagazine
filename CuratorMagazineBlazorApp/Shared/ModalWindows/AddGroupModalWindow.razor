@@ -1,4 +1,5 @@
-﻿<div class="modal fade" aria-labelledby="addModelLabel" style="display: none;" aria-hidden="true" tabindex="-1" id="addModal">
+﻿@using CuratorMagazineWebAPI.Models.Entities.Domains
+<div class="modal fade" aria-labelledby="addModelLabel" style="display: none;" aria-hidden="true" tabindex="-1" id="addModal">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header text-center">
@@ -7,55 +8,59 @@
             </div>
             <div class="modal-body">
                 <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-5 text-center">
-                            <img class="img-fluid" src="../img/no-img.jpg" alt="">
-                            <button type="image" class="btn btn-outline-secondary mt-3">Обзор</button>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="inputGroup" class="col-md-2 col-form-label">Группа</label>
-                            <div class="col-ms-10">
-                                <input type="text" class="form-control" id="inputGroup">
-                            </div>
-                            <label for="selectCurator" class="col-md-2 col-form-label">Куратор</label>
-                            <div class="col-ms-10">
-                                <select class="form-select border-1" id="selectCurator">
-                                    <option selected>Не выбрано</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
+                    <Form Model="@_group"
+                           OnFinish="OnFinish"
+                           OnFinishFailed="OnFinishFailed"
+                           LabelColSpan="8"
+                           WrapperColSpan="16">
+                        <Row>
+                            <GridCol>
+                                <img class="img-thumbnail" height="300px" width="300px" src="../img/no-img.jpg" alt="">
+                            </GridCol>
+
+                            <GridCol Span="13">
+                                <FormItem Label="Название">
+                                    <div class="col-ms-10">
+                                        <Input @bind-Value="@context.Name" />
+                                    </div>
+                                </FormItem>
+                                <FormItem Label="Гурппа">
+                                    <div class="col-ms-10">
+                                        <Select Mode="default"
+                                                DataSource="@_curators"
+                                                TItem="User"
+                                                TItemValue="string"
+                                                @bind-Value="@SelectedDivision"
+                                                LabelName="@nameof(User.Name)"
+                                                ValueName="@nameof(User.Name)">
+                                        </Select>
+                                    </div>
+                                </FormItem>
+                            </GridCol>
+                        </Row>
+                        <Row>
+                            <GridCol Span="10" Style="text-align:center;">
+                                <Button type="image" class="btn btn-outline-secondary mt-3">Обзор</Button>
+                            </GridCol>
+                        </Row>
+                        <Row>
+                            <GridCol Span="24" Style="text-align:right;">
+                                <FormItem WrapperColOffset="8" WrapperColSpan="16">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                        Отмена
+                                    </button>
+                                    <Button Type="@ButtonType.Primary" HtmlType="submit" Style="height: 37px" OnClick="@AddGroup">
+                                        Добавить
+                                    </Button>
+                                </FormItem>
+                            </GridCol>
+                        </Row>
+                    </Form>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
-                <button type="button" class="btn btn-primary" @onclick="(() => AddGroup.InvokeAsync(_group))">Сохранить</button>
             </div>
         </div>
     </div>
 </div>
 @code {
-    private Group _group = new Group();
-
-    [Parameter]
-    public User? CurrentUser { get; set; }
-
-    [Parameter]
-    public EventCallback<User> RoleCallback { get; set; }
-
-    private void OnFinish(EditContext editContext)
-    {
-        Console.WriteLine($"Success:{JsonSerializer.Serialize(_group)}");
-    }
-
-    private void OnFinishFailed(EditContext editContext)
-    {
-        Console.WriteLine($"Failed:{JsonSerializer.Serialize(_group)}");
-    }
-
-    [Parameter]
-    public EventCallback<Group> AddGroup { get; set; }
+    
 }

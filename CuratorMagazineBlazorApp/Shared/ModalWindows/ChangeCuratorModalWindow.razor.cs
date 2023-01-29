@@ -28,11 +28,17 @@ public partial class ChangeCuratorModalWindow
     public EventCallback<User> RoleCallback { get; set; }
 
     /// <summary>
+    /// Gets or sets the selected division.
+    /// </summary>
+    /// <value>The selected division.</value>
+    private string? SelectedDivision { get; set; }
+
+    /// <summary>
     /// Gets or sets the user service.
     /// </summary>
     /// <value>The user service.</value>
     [Inject]
-    public UserService? UserService { get; set; }
+    public DivisionService? DivisionService { get; set; }
 
     /// <summary>
     /// Gets or sets the navigation manager.
@@ -63,6 +69,17 @@ public partial class ChangeCuratorModalWindow
     {
         Console.WriteLine($"Failed: {JsonConvert.SerializeObject(Curator)}");
     }
+
+    /// <summary>
+    /// On initialized as an asynchronous operation.
+    /// </summary>
+    /// <returns>A Task representing the asynchronous operation.</returns>
+    protected override async Task OnInitializedAsync()
+    {
+        var ret = await DivisionService?.PostAsync()!;
+        _divisions = JsonConvert.DeserializeObject<List<Division>>(ret.Result.Items?.ToString() ?? string.Empty);
+    }
+
 
     /// <summary>
     /// Changes the curator.
