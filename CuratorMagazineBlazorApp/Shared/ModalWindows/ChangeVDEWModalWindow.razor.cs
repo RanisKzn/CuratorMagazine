@@ -1,7 +1,9 @@
-﻿using CuratorMagazineBlazorApp.Data.Services;
+﻿using AntDesign;
+using CuratorMagazineBlazorApp.Data.Services;
 using CuratorMagazineWebAPI.Models.Entities.Domains;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
+using Microsoft.AspNetCore.Components.Web;
 using Newtonsoft.Json;
 
 namespace CuratorMagazineBlazorApp.Shared.ModalWindows;
@@ -14,7 +16,7 @@ namespace CuratorMagazineBlazorApp.Shared.ModalWindows;
 public partial class ChangeVDEWModalWindow
 {
     [Parameter]
-    public User? _vdew { get; set; }
+    public User? VDEW { get; set; }
 
     /// <summary>
     /// Gets or sets the division service.
@@ -22,6 +24,10 @@ public partial class ChangeVDEWModalWindow
     /// <value>The division service.</value>
     [Inject]
     public DivisionService? DivisionService { get; set; }
+
+    [Parameter]
+    public bool Visible { get; set; }
+
 
     /// <summary>
     /// The divisions
@@ -34,13 +40,16 @@ public partial class ChangeVDEWModalWindow
     /// <value>The selected division.</value>
     private string? _selectedDivision { get; set; }
 
+    
+
     /// <summary>
     /// Called when [finish].
     /// </summary>
     /// <param name="editContext">The edit context.</param>
     private void OnFinish(EditContext editContext)
     {
-        Console.WriteLine($"Success: {JsonConvert.SerializeObject(_vdew)}");
+        Console.WriteLine($"Success: {JsonConvert.SerializeObject(VDEW)}");
+        
     }
 
     /// <summary>
@@ -49,7 +58,7 @@ public partial class ChangeVDEWModalWindow
     /// <param name="editContext">The edit context.</param>
     private void OnFinishFailed(EditContext editContext)
     {
-        Console.WriteLine($"Failed: {JsonConvert.SerializeObject(_vdew)}");
+        Console.WriteLine($"Failed: {JsonConvert.SerializeObject(VDEW)}");
 
     }
 
@@ -62,7 +71,7 @@ public partial class ChangeVDEWModalWindow
         var ret = await DivisionService?.PostAsync()!;
         _divisions = JsonConvert.DeserializeObject<List<Division>>(ret.Result.Items?.ToString() ?? string.Empty);
 
-        _selectedDivision = _vdew.Division.Name;
+        _selectedDivision = VDEW.Division.Name;
     }
 
     /// <summary>
@@ -71,5 +80,24 @@ public partial class ChangeVDEWModalWindow
     public void ChangeVDEW()
     {
 
+    }
+
+
+   
+
+    private void HandleCancel(MouseEventArgs e)
+    {
+        Console.WriteLine("e");
+        Visible = false;
+    }
+
+
+    /// <summary>
+    /// on modal OK button is click, submit form manually
+    /// </summary>
+    /// <param name="e"></param>
+    private void HandleOk(MouseEventArgs e)
+    {
+        Visible = false;
     }
 }
