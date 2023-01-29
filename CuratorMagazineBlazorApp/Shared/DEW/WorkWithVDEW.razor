@@ -35,8 +35,11 @@
         <div class="row">
             <div class="row-md text-center mb-2">
                 <hr>
-                <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#addModal">Добавить</button>
-                <AddVDEWModalWindow></AddVDEWModalWindow>
+                <button type="button" class="btn btn-secondary" @onclick="ModalAddVdewWindow">Добавить</button>
+                @if (IsVisibleModalAddVdewWindow)
+                {
+                    <AddVDEWModalWindow Visible="IsVisibleModalAddVdewWindow"></AddVDEWModalWindow>
+                }
             </div>
         </div>
     </div>

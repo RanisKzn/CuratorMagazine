@@ -26,15 +26,11 @@ namespace CuratorMagazineBlazorApp.Shared.StatsCollect
 
         private List<Group>? _groups;
 
-        public async Task GetGroups()
+        protected override async Task OnInitializedAsync()
         {
             _groups = new List<Group>();
             var groups = await GroupService.PostAsync();
             _groups = JsonConvert.DeserializeObject<List<Group>>(groups.Result.Items?.ToString() ?? string.Empty);
-        }
-        protected override async Task OnInitializedAsync()
-        {
-            await GetGroups();
         }
 
         public void ChangeOnWorkWithVDEWStateRoleNavBar()

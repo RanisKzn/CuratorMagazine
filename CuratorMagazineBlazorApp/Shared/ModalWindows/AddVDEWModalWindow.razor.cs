@@ -2,6 +2,7 @@
 using CuratorMagazineWebAPI.Models.Entities.Domains;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
+using Microsoft.AspNetCore.Components.Web;
 using Newtonsoft.Json;
 
 namespace CuratorMagazineBlazorApp.Shared.ModalWindows;
@@ -38,6 +39,9 @@ public partial class AddVDEWModalWindow
     /// <value>The navigation manager.</value>
     [Inject]
     public NavigationManager? NavigationManager { get; set; }
+
+    [Parameter]
+    public bool Visible { get; set; }
 
     /// <summary>
     /// The divisions
@@ -85,5 +89,21 @@ public partial class AddVDEWModalWindow
     public async void AddVDEWAsync()
     {
         await UserService?.CreateAsync(_vdew)!;
+    }
+
+    private void HandleCancel(MouseEventArgs e)
+    {
+        Console.WriteLine("e");
+        Visible = false;
+    }
+
+
+    /// <summary>
+    /// on modal OK button is click, submit form manually
+    /// </summary>
+    /// <param name="e"></param>
+    private void HandleOk(MouseEventArgs e)
+    {
+        Visible = false;
     }
 }

@@ -43,4 +43,19 @@ public partial class WorkWithVDEW
         var users = await UserService?.PostAsync()!;
         _users = JsonConvert.DeserializeObject<List<User>>(users.Result.Items?.ToString() ?? string.Empty);
     }
+
+    private bool IsVisibleModalAddVdewWindow { get; set; }
+
+
+    public void ModalAddVdewWindow()
+    {
+        if (IsVisibleModalAddVdewWindow)
+        {
+            IsVisibleModalAddVdewWindow = false;
+        }
+        else
+        {
+            IsVisibleModalAddVdewWindow = true;
+        }
+    }
 }
