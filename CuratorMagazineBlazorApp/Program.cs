@@ -1,6 +1,4 @@
 using CuratorMagazineBlazorApp.Data.Services;
-using CuratorMagazineBlazorApp.RabbitMq;
-using System.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,7 +7,6 @@ builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddAntDesign();
 builder.Services.AddCors();
-//builder.Services.AddHostedService<RabbitMqListener>();
 
 #region Services
 builder.Services.AddSingleton<UserService>();

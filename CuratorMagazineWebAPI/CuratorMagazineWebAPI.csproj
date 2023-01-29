@@ -39,7 +39,6 @@
     <PackageReference Include="Npgsql.Json.NET" Version="6.0.7" />
     <PackageReference Include="Npgsql.NetTopologySuite" Version="6.0.7" />
     <PackageReference Include="Npgsql.NodaTime" Version="6.0.7" />
-    <PackageReference Include="RabbitMQ.Client" Version="6.4.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
     <PackageReference Include="X.PagedList" Version="8.4.3" />
   </ItemGroup>

@@ -2,7 +2,7 @@
 @using CuratorMagazineWebAPI.Models.Entities.Domains
 <div class="row">
     <div class="col-1">
-        @if (_vdew.ProfilePhoto == null)
+        @if (_vdew?.ProfilePhoto == null)
         {
             <img class="rounded img-fluid" src="../img/no-img.jpg" alt="">
         }
@@ -12,8 +12,8 @@
         }
     </div>
     <div class="col-8">
-        <h5>@_vdew.Name</h5>
-        <p>@_vdew.Email</p>
+        <h5>@_vdew?.Name</h5>
+        <p>@_vdew?.Email</p>
     </div>
     <div class="col-3 text-end">
         <button type="button" class="btn btn-secondary me-2" data-bs-toggle="modal" data-bs-target="#changeModal" @onclick="ChangeVisible">Изменить</button>

@@ -17,7 +17,6 @@ using CuratorMagazineWebAPI.Models.Context;
 using Microsoft.OpenApi.Models;
 using CuratorMagazineWebAPI.Models.Entities.Repositories.Entities;
 using CuratorMagazineWebAPI.Models.Entities.Repositories.Interfaces;
-using CuratorMagazineWebAPI.RabbitMq;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -36,7 +35,6 @@ builder.Services.AddSwaggerGen(options =>
 });
 
 builder.Services.AddPersistence(builder.Configuration);
-//builder.Services.AddScoped<IRabbitMqService, RabbitMqService>();
 
 #region Repositories
 builder.Services.AddTransient<IDivisionRepository, DivisionRepository>();
