@@ -13,6 +13,10 @@
     </div>
     <div class="col-8">
         <h5>@_vdew?.Name</h5>
+        @if (IsVisibleModalChangeVdewWindow)
+        {
+            <ChangeVDEWModalWindow _vdew="@_vdew"></ChangeVDEWModalWindow>
+        }
         <p>@_vdew?.Email</p>
     </div>
     <div class="col-3 text-end">
@@ -20,10 +24,7 @@
         <button type="button" class="btn btn-secondary" @onclick="(() => DeleteVDEW.InvokeAsync(_vdew))">Удалить</button>
     </div>
 </div>
-@if (IsVisibleModalChangeVdewWindow)
-{
-    <ChangeVDEWModalWindow _vdew="@_vdew"></ChangeVDEWModalWindow>
-}
+
 
 @code {
     [Parameter]
