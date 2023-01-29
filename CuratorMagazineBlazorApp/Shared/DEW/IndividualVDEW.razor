@@ -20,7 +20,7 @@
         <p>@_vdew?.Email</p>
     </div>
     <div class="col-3 text-end">
-        <button type="button" class="btn btn-secondary me-2" data-bs-toggle="modal" data-bs-target="#changeModal" @onclick="ChangeVisible">Изменить</button>
+        <button type="button" class="btn btn-secondary me-2" @onclick="ChangeVisible">Изменить</button>
         <button type="button" class="btn btn-secondary" @onclick="(() => DeleteVDEW.InvokeAsync(_vdew))">Удалить</button>
     </div>
 </div>
@@ -37,14 +37,7 @@
 
     public void ChangeVisible()
     {
-        if (IsVisibleModalChangeVdewWindow)
-        {
-            IsVisibleModalChangeVdewWindow = false;
-        }
-        else
-        {
-            IsVisibleModalChangeVdewWindow = true;
-        }
+        IsVisibleModalChangeVdewWindow = !IsVisibleModalChangeVdewWindow;
     }
 
     void SaveVDEW(User user)
