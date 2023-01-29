@@ -1,10 +1,11 @@
-﻿<div class="container my-4 bg-secondary bg-opacity-50">
+﻿@using CuratorMagazineBlazorApp.Shared.ModalWindows
+<div class="container my-4 bg-secondary bg-opacity-50">
     <div class="container-fluid">
         <BodySearchBar></BodySearchBar>
         <div class="overflow-auto container scroll">
             @if (Groups != null)
             {
-                @foreach (var item in Groups!)
+                @foreach (var item in Groups)
                 {
                     <IndividualGroupVDEW Group="item"></IndividualGroupVDEW>
                 }
@@ -14,7 +15,7 @@
             <div class="row-md text-center mb-2">
                 <hr>
                 <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#addModal">Добавить</button>
-                <AddGroupModalWindow AddGroup="AddGroup"></AddGroupModalWindow>
+                <AddGroupModalWindow></AddGroupModalWindow>
             </div>
         </div>
     </div>

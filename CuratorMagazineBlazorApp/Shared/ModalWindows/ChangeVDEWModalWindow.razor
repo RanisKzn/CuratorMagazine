@@ -1,4 +1,5 @@
-﻿<div class="modal fade" aria-labelledby="addModelLabel" style="display: none;" aria-hidden="true" tabindex="-1" id="changeModal">
+﻿@using CuratorMagazineWebAPI.Models.Entities.Domains
+<div class="modal fade" aria-labelledby="addModelLabel" style="display: none;" aria-hidden="true" tabindex="-1" id="changeModal">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header text-center">
@@ -7,8 +8,7 @@
             </div>
             <div class="modal-body">
                 <div class="container-fluid">
-                    @*todo: Возникает исключение в данном учатке*@ 
-                    @*<Form Model="@User"
+                    <Form Model="@_vdew"
                           OnFinish="OnFinish"
                           OnFinishFailed="OnFinishFailed"
                           LabelColSpan="8"
@@ -30,7 +30,7 @@
                                                 DataSource="@_divisions"
                                                 TItem="Division"
                                                 TItemValue="string"
-                                                @bind-Value="@context.Division.Name"
+                                                @bind-Value="@_selectedDivision"
                                                 LabelName="@nameof(Division.Name)"
                                                 ValueName="@nameof(Division.Name)">
                                         </Select>
@@ -67,12 +67,12 @@
                                         Отмена
                                     </button>
                                     <Button Type="@ButtonType.Primary" HtmlType="submit" Style="height: 37px" OnClick="@ChangeVDEW">
-                                        Добавить
+                                        Сохранить
                                     </Button>
                                 </FormItem>
                             </GridCol>
                         </Row>
-                    </Form>*@
+                    </Form>
 
                 </div>
             </div>

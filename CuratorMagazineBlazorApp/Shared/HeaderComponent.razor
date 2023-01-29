@@ -1,4 +1,5 @@
-﻿<header  class="container">
+﻿@using CuratorMagazineWebAPI.Models.Entities.Domains
+<header  class="container">
     <MainHeader CurrentUser="@CurrentUser"></MainHeader>
     <EnterModalWindow RoleCallback="@SetUser"></EnterModalWindow>
     <ExitModalWindow UserNullCallback="@SetUserNull"></ExitModalWindow>
