@@ -14,7 +14,7 @@ namespace CuratorMagazineBlazorApp.Shared.ModalWindows;
 public partial class ChangeVDEWModalWindow
 {
     [Parameter]
-    public User? CurrentUser { get; set; }
+    public User? _vdew { get; set; }
 
     /// <summary>
     /// Gets or sets the division service.
@@ -29,12 +29,18 @@ public partial class ChangeVDEWModalWindow
     private List<Division>? _divisions = new();
 
     /// <summary>
+    /// Gets or sets the selected division.
+    /// </summary>
+    /// <value>The selected division.</value>
+    private string? _selectedDivision { get; set; }
+
+    /// <summary>
     /// Called when [finish].
     /// </summary>
     /// <param name="editContext">The edit context.</param>
     private void OnFinish(EditContext editContext)
     {
-        Console.WriteLine($"Success: {JsonConvert.SerializeObject(CurrentUser)}");
+        Console.WriteLine($"Success: {JsonConvert.SerializeObject(_vdew)}");
     }
 
     /// <summary>
@@ -43,7 +49,7 @@ public partial class ChangeVDEWModalWindow
     /// <param name="editContext">The edit context.</param>
     private void OnFinishFailed(EditContext editContext)
     {
-        Console.WriteLine($"Failed: {JsonConvert.SerializeObject(CurrentUser)}");
+        Console.WriteLine($"Failed: {JsonConvert.SerializeObject(_vdew)}");
 
     }
 
@@ -55,6 +61,8 @@ public partial class ChangeVDEWModalWindow
     {
         var ret = await DivisionService?.PostAsync()!;
         _divisions = JsonConvert.DeserializeObject<List<Division>>(ret.Result.Items?.ToString() ?? string.Empty);
+
+        _selectedDivision = _vdew.Division.Name;
     }
 
     /// <summary>

@@ -1,10 +1,17 @@
 ﻿<div class="container my-4 bg-secondary bg-opacity-50" @onload="GetGroups">
     <div class="container-fluid">
+        <BodySearchBar></BodySearchBar>
         <div class="overflow-auto container scroll text-white">
             @foreach (var item in _groups)
             {
                 <IndividualGroup group="item"></IndividualGroup>
             }
         </div>
+        <div class="row">
+            <div class="row-md text-center mb-2">
+                <hr>
+            </div>
+        </div>
     </div>
 </div>
+
