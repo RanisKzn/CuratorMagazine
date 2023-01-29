@@ -8,16 +8,23 @@
         <div class="overflow-auto container">
             @if(CurrentUser != null)
             {
-                @if (_users != null)
+                @if (_users == null || _users.Count == 0)
                 {
+                    <div class="row">
+                        <div class="col-12">
+                            <p><em>Loading...</em></p>
+                        </div>
+                    </div>
+                    
+                }
+                else{
                     foreach (var item in _users)
                     {
-                        if (item.Division?.Name == CurrentUser.Division?.Name && item.Role?.Name == "admin2")
-                        {
+                        @*if (item.Division?.Name == CurrentUser.Division?.Name && item.Role?.Name == "Deputy Director")
+                        {*@
                             <IndividualVDEW _vdew="@item" DeleteVDEW="@DeleteVDEW"></IndividualVDEW>
-                        }
+                        @*}*@
                     }
-                    
                 }
             }
             else
