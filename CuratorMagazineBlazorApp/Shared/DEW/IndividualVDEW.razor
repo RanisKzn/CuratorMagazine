@@ -37,25 +37,13 @@
 
     private bool IsVisibleModalChangeVdewWindow { get; set; }
 
-
     public void ShowModalChangeVdewWindow()
     {
-        if (IsVisibleModalChangeVdewWindow)
-        {
-            
-        }
-        else
-        {
-            IsVisibleModalChangeVdewWindow = true;
-        }
+        IsVisibleModalChangeVdewWindow = !IsVisibleModalChangeVdewWindow;
     }
-
-
 
     void SaveVDEW(User user)
     {
 
     }
-
-
 }
