@@ -1,7 +1,7 @@
 ﻿@using CuratorMagazineBlazorApp.Data.Services
 @using CuratorMagazineBlazorApp.Shared.Curator
 @using CuratorMagazineWebAPI.Models.Entities.Domains
-<div class="row " >
+<div class="row group rounded">
     <div class="col-md-1">
         <img class="rounded img-fluid mt-1" src="../img/no-img.jpg" alt="">
     </div>
@@ -10,14 +10,14 @@
         <p>@*@Curator.Name*@</p>
         
     </div>
-    @if (CurrentUser?.Role?.Name == "admin3")
+    @if (CurrentUser?.Role?.Name == "Curator")
     {
         <div class="col-md-3 text-end mt-3">
             <a href="../Curator/cur3.html" type="button" class="btn btn-secondary me-2">Изменить</a>
         </div>
         <ChangeGroup group="group"></ChangeGroup>
     }
-   
+    <hr class="mb-0">
 </div>
 
 @code {
